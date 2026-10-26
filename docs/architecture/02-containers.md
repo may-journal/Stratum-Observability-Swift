@@ -1,7 +1,3 @@
----
-fitnessFunctions: ['architecture-contract', 'architecture-containers']
----
-
 # Containers
 
 A container here is an app that runs on its own. Stratum ships only library products, and they run inside the host app's process, so [03-components.md](03-components.md) shows them. This repo builds no container of its own.

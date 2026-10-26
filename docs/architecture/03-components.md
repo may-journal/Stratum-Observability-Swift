@@ -1,7 +1,3 @@
----
-fitnessFunctions: ['architecture-contract', 'architecture-components']
----
-
 # Components
 
 This splits the library products that run inside the host app of [02-containers.md](02-containers.md) into the files that build them.
