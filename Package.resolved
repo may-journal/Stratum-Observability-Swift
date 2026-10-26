@@ -1,0 +1,15 @@
+{
+  "originHash" : "a87a25a3d4bdd0ad844021cd494ccbce1fe89265800b53e1d61ee3efc1205a39",
+  "pins" : [
+    {
+      "identity" : "apple-ui-testing-library",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/may-journal/apple-ui-testing-library",
+      "state" : {
+        "revision" : "180d62f0f20878c8c66f1bbe56aa42095a35225b",
+        "version" : "1.7.2"
+      }
+    }
+  ],
+  "version" : 3
+}
