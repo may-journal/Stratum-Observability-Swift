@@ -1,0 +1,27 @@
+{
+  "appVersion": "2.1",
+  "timeStampBegin": "2026-10-25 00:00:00 +0000",
+  "timeStampEnd": "2026-10-25 23:59:00 +0000",
+  "metaData": {
+    "appBuildVersion": "41",
+    "osVersion": "iPhone OS 27.0",
+    "deviceType": "iPhone18,1",
+    "regionFormat": "US"
+  },
+  "memoryMetrics": {
+    "peakMemoryUsage": "182400 kB",
+    "averageSuspendedMemory": {
+      "averageValue": "41000 kB",
+      "standardDeviation": 0,
+      "sampleCount": 12
+    }
+  },
+  "applicationLaunchMetrics": {
+    "histogrammedTimeToFirstDrawKey": {
+      "histogramNumBuckets": 1,
+      "histogramValue": {
+        "0": { "bucketStart": "400 ms", "bucketEnd": "410 ms", "bucketCount": 9 }
+      }
+    }
+  }
+}

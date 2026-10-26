@@ -1,0 +1,33 @@
+{
+  "timeStampBegin": "2026-10-25 00:00:00 +0000",
+  "timeStampEnd": "2026-10-25 23:59:00 +0000",
+  "crashDiagnostics": [
+    {
+      "version": "1.0.0",
+      "diagnosticMetaData": {
+        "appVersion": "2.1",
+        "appBuildVersion": "41",
+        "osVersion": "iPhone OS 27.0",
+        "deviceType": "iPhone18,1",
+        "exceptionType": 1,
+        "exceptionCode": 0,
+        "signal": 11,
+        "terminationReason": "Namespace SIGNAL, Code 0xb"
+      },
+      "callStackTree": { "callStacks": [], "callStackPerThread": true }
+    }
+  ],
+  "hangDiagnostics": [
+    {
+      "version": "1.0.0",
+      "diagnosticMetaData": {
+        "appVersion": "2.1",
+        "appBuildVersion": "41",
+        "osVersion": "iPhone OS 27.0",
+        "deviceType": "iPhone18,1",
+        "hangDuration": "3 sec"
+      },
+      "callStackTree": { "callStacks": [], "callStackPerThread": true }
+    }
+  ]
+}
