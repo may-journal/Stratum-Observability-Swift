@@ -1,7 +1,3 @@
----
-fitnessFunctions: ['architecture-contract', 'architecture-code']
----
-
 # Code
 
 The types an app uses, from [03-components.md](03-components.md). `Package.swift` declares the three products, for iOS 26 and macOS 26 and later, in Swift 6 language mode.

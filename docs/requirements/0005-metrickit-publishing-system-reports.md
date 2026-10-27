@@ -1,7 +1,3 @@
----
-relatedConfigurations: ['../../.fitnessrc.json']
----
-
 # 0005 Publishing the system's reports
 
 ## Why

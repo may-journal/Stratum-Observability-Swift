@@ -1,7 +1,3 @@
----
-relatedConfigurations: ['../../.fitnessrc.json']
----
-
 # 0002 What each event carries
 
 ## Why
