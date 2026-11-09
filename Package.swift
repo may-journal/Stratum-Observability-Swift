@@ -1,5 +1,5 @@
 // swift-tools-version: 6.2
-// Stratum's core and its plugins, in the build order Plan #1 set. See docs/architecture/04-code.md.
+// Stratum's core and its plugins, in the build order Plan #1 set, as docs/architecture/04-code.md shows.
 import PackageDescription
 
 let package = Package(

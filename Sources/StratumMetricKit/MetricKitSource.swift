@@ -2,12 +2,10 @@ import Foundation
 import MetricKit
 import Stratum
 
-/// Publishes the reports MetricKit delivers as Stratum events, so every plugin the app chose
-/// sees its launch, memory, crash and hang numbers. Reports arrive from the system, at most
-/// once a day, and never on demand.
+/// Publishes MetricKit's reports as Stratum events, so every plugin sees launch, memory, crash
+/// and hang numbers that arrive at most once a day.
 ///
-/// Only `start()` touches MetricKit's subscriber API. Everything else reads a report's JSON,
-/// which keeps the same shape when Apple replaces that API.
+/// Only `start()` touches MetricKit's subscriber API, and the rest reads a report's JSON.
 public final class MetricKitSource: NSObject, Sendable {
     /// The events this source publishes. Adding the source adds this catalog.
     public static let catalog = Catalog(
