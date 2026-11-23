@@ -1,7 +1,7 @@
 import Foundation
 import Stratum
+import StratumTesting
 import SwiftUI
-import Synchronization
 import Testing
 import UITestingLibrary
 
@@ -30,27 +30,8 @@ func tap(_ title: String, _ action: @escaping @MainActor () -> Void) async throw
     try screen.close()
 }
 
-/// A plugin an app writes for itself, which keeps every snapshot it receives.
-final class Recorder: Plugin {
-    let name: String
-    let only: Level?
-    private let received = Mutex<[Snapshot]>([])
-
-    init(name: String = "recorder", only: Level? = nil) {
-        self.name = name
-        self.only = only
-    }
-
-    var snapshots: [Snapshot] { received.withLock { $0 } }
-
-    func accepts(_ snapshot: Snapshot) -> Bool {
-        only.map { $0 == snapshot.event.level } ?? true
-    }
-
-    func publish(_ snapshot: Snapshot) {
-        received.withLock { $0.append(snapshot) }
-    }
-}
+/// The shipped recorder, under the short name every requirement suite uses.
+typealias Recorder = StratumTesting.Recorder
 
 /// The catalog most requirements start from: a note a person saves, and a failed sync.
 let notes = Catalog(

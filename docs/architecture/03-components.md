@@ -27,6 +27,10 @@ C4Component
         Component(reports, "11 Reports", "Swift", "Sources/StratumMetricKit/MetricReport.swift, Sources/StratumMetricKit/DiagnosticReport.swift")
     }
 
+    Container_Boundary(testing, "14 StratumTesting (Sources/StratumTesting)") {
+        Component(recorder, "15 Recorder", "Swift", "Sources/StratumTesting/Recorder.swift")
+    }
+
     System_Ext(log, "12 Unified log", "Apple's on-device log.")
     System_Ext(system, "13 MetricKit", "Apple's daily reports.")
 
@@ -42,6 +46,8 @@ C4Component
     Rel(source, reports, "J")
     Rel(source, catalog, "K")
     Rel(source, service, "L")
+    Rel(recorder, snapshot, "M")
+    Rel(recorder, catalog, "N")
 
     UpdateElementStyle(dev, $bgColor="#334155", $borderColor="#1e293b", $fontColor="#ffffff")
     UpdateElementStyle(manifest, $bgColor="#b45309", $borderColor="#92400e", $fontColor="#ffffff")
@@ -51,6 +57,7 @@ C4Component
     UpdateElementStyle(logPlugin, $bgColor="#b45309", $borderColor="#92400e", $fontColor="#ffffff")
     UpdateElementStyle(source, $bgColor="#b45309", $borderColor="#92400e", $fontColor="#ffffff")
     UpdateElementStyle(reports, $bgColor="#b45309", $borderColor="#92400e", $fontColor="#ffffff")
+    UpdateElementStyle(recorder, $bgColor="#b45309", $borderColor="#92400e", $fontColor="#ffffff")
     UpdateElementStyle(log, $bgColor="#64748b", $borderColor="#475569", $fontColor="#ffffff")
     UpdateElementStyle(system, $bgColor="#64748b", $borderColor="#475569", $fontColor="#ffffff")
 ```
@@ -75,7 +82,7 @@ Numbers on nodes and letters on arrows match the callout table.
 | #   | Description | Why |
 | --- | --- | --- |
 | 1   | The developer, whose app links the products and calls the service. | Every run starts with this actor. |
-| 2   | `Package.swift` declares the three products, for iOS 26 and macOS 26 and later. | An app links only the plugins it uses. |
+| 2   | `Package.swift` declares the four products, for iOS 26 and macOS 26 and later. | An app links only the plugins it uses. |
 | 3   | The core library, from `Sources/Stratum`. | Catalogs, context and publishing, with no plugin of its own. |
 | 4   | `Stratum` holds catalogs, plugins, context and listeners behind one lock, and publishes. | Safe to call from any thread. |
 | 5   | `Catalog`, `CatalogError`, `Event` and `Level`. | An event names its category, level and allowed fields. |
@@ -87,6 +94,8 @@ Numbers on nodes and letters on arrows match the callout table.
 | 11  | `MetricReport` and `DiagnosticReport` read a report's JSON. | The JSON shape outlives the API Apple is replacing. |
 | 12  | The unified log the OSLog plugin writes to. | Read in Console and Xcode. |
 | 13  | The MetricKit framework the source subscribes to. | Delivers reports on its own schedule. |
+| 14  | The testing product, from `Sources/StratumTesting`. | Only an app's test target links it. |
+| 15  | `Recorder` keeps each snapshot it receives, in order. | A test reads what the app published. |
 | A   | The app adds the package and links its products. | SwiftPM or an Xcode package reference. |
 | B   | The app adds catalogs and plugins, and publishes. | One service per product. |
 | C   | The service checks each catalog's events. | A bad key fails when it is added, not when it is used. |
@@ -99,3 +108,5 @@ Numbers on nodes and letters on arrows match the callout table.
 | J   | The source reads each payload's JSON. | Saved reports replay through the same path. |
 | K   | The source declares its own catalog. | Its keys are fixed and checked like any other. |
 | L   | The source publishes through the service. | Reports reach every plugin the app chose. |
+| M   | The recorder conforms to `Plugin`. | A test adds it like any other plugin. |
+| N   | The recorder can accept one level only. | A test proves what a filtering plugin receives. |

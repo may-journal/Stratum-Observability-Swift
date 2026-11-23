@@ -37,6 +37,7 @@ flowchart TB
     snapshot[(5 Event frozen with context<br/>Req 0002)]:::system
     log[6 Entry in the unified log<br/>Req 0004]:::screen
     report[(7 System report published<br/>Req 0005)]:::system
+    test(8 Assert events in a test<br/>Req 0006):::action
 
     dev --> catalog
     catalog --> plugins
@@ -45,6 +46,7 @@ flowchart TB
     snapshot --> log
     plugins --> report
     report --> log
+    snapshot --> test
 
     classDef persona fill:#eef2ff,stroke:#6366f1,color:#312e81,stroke-width:2px
     classDef screen fill:#f8fafc,stroke:#64748b,color:#1e293b,stroke-width:2px
@@ -63,3 +65,4 @@ Numbers match the callout table.
 | 5   | Stratum freezes the event with its context and session. | System | Every plugin reads the same value. |
 | 6   | The developer reads the entry in Console or Xcode. | Screen | Private fields stay hidden there. |
 | 7   | MetricKit's daily report becomes events. | System | Crashes and hangs show beside the app's own events. |
+| 8   | The developer's test reads the recorder. | Action | A wrong key or field fails before release. |

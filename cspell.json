@@ -24,6 +24,7 @@
     "swiftlint",
     "swiftpm",
     "Totalist",
+    "typealias",
     "xcrun"
   ]
 }

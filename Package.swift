@@ -9,6 +9,7 @@ let package = Package(
         .library(name: "Stratum", targets: ["Stratum"]),
         .library(name: "StratumOSLog", targets: ["StratumOSLog"]),
         .library(name: "StratumMetricKit", targets: ["StratumMetricKit"]),
+        .library(name: "StratumTesting", targets: ["StratumTesting"]),
     ],
     dependencies: [
         .package(url: "https://github.com/may-journal/apple-ui-testing-library", from: "1.7.2")
@@ -17,10 +18,11 @@ let package = Package(
         .target(name: "Stratum"),
         .target(name: "StratumOSLog", dependencies: ["Stratum"]),
         .target(name: "StratumMetricKit", dependencies: ["Stratum"]),
+        .target(name: "StratumTesting", dependencies: ["Stratum"]),
         .testTarget(
             name: "StratumRequirements",
             dependencies: [
-                "Stratum", "StratumOSLog", "StratumMetricKit",
+                "Stratum", "StratumOSLog", "StratumMetricKit", "StratumTesting",
                 .product(name: "UITestingLibrary", package: "apple-ui-testing-library"),
             ],
             resources: [.copy("Reports")]
