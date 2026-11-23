@@ -11,6 +11,7 @@ This is the Swift edition. The TypeScript edition lives in [may-journal/Stratum-
 | `Stratum` | Catalogs, context, listeners and publishing. It needs no plugin of its own. |
 | `StratumOSLog` | Writes each event to Apple's unified log, under the app's subsystem and the event's category. |
 | `StratumMetricKit` | Publishes the metric and diagnostic reports MetricKit delivers as events. |
+| `StratumFile` | Appends each event as one JSON line to a file on the device, which the app can share. |
 | `StratumTesting` | Gives an app's tests a `Recorder` plugin that keeps each published event. |
 
 Plugins are built in the order [Plan #1](https://github.com/may-journal/Stratum-Observability-Swift/issues/1) set. The two local ones come first and need no server. Optional remote plugins, such as Sentry, TelemetryDeck and OpenTelemetry, come later, and only an app that chooses them sends data off the device.

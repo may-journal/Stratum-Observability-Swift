@@ -31,6 +31,10 @@ C4Component
         Component(recorder, "15 Recorder", "Swift", "Sources/StratumTesting/Recorder.swift")
     }
 
+    Container_Boundary(fileProduct, "16 StratumFile (Sources/StratumFile)") {
+        Component(filePlugin, "17 File plugin", "Swift", "Sources/StratumFile/FilePlugin.swift")
+    }
+
     System_Ext(log, "12 Unified log", "Apple's on-device log.")
     System_Ext(system, "13 MetricKit", "Apple's daily reports.")
 
@@ -48,6 +52,8 @@ C4Component
     Rel(source, service, "L")
     Rel(recorder, snapshot, "M")
     Rel(recorder, catalog, "N")
+    Rel(filePlugin, snapshot, "O")
+    Rel(filePlugin, catalog, "P")
 
     UpdateElementStyle(dev, $bgColor="#334155", $borderColor="#1e293b", $fontColor="#ffffff")
     UpdateElementStyle(manifest, $bgColor="#b45309", $borderColor="#92400e", $fontColor="#ffffff")
@@ -58,6 +64,7 @@ C4Component
     UpdateElementStyle(source, $bgColor="#b45309", $borderColor="#92400e", $fontColor="#ffffff")
     UpdateElementStyle(reports, $bgColor="#b45309", $borderColor="#92400e", $fontColor="#ffffff")
     UpdateElementStyle(recorder, $bgColor="#b45309", $borderColor="#92400e", $fontColor="#ffffff")
+    UpdateElementStyle(filePlugin, $bgColor="#b45309", $borderColor="#92400e", $fontColor="#ffffff")
     UpdateElementStyle(log, $bgColor="#64748b", $borderColor="#475569", $fontColor="#ffffff")
     UpdateElementStyle(system, $bgColor="#64748b", $borderColor="#475569", $fontColor="#ffffff")
 ```
@@ -82,7 +89,7 @@ Numbers on nodes and letters on arrows match the callout table.
 | #   | Description | Why |
 | --- | --- | --- |
 | 1   | The developer, whose app links the products and calls the service. | Every run starts with this actor. |
-| 2   | `Package.swift` declares the four products, for iOS 26 and macOS 26 and later. | An app links only the plugins it uses. |
+| 2   | `Package.swift` declares the five products, for iOS 26 and macOS 26 and later. | An app links only the plugins it uses. |
 | 3   | The core library, from `Sources/Stratum`. | Catalogs, context and publishing, with no plugin of its own. |
 | 4   | `Stratum` holds catalogs, plugins, context and listeners behind one lock, and publishes. | Safe to call from any thread. |
 | 5   | `Catalog`, `CatalogError`, `Event` and `Level`. | An event names its category, level and allowed fields. |
@@ -96,6 +103,8 @@ Numbers on nodes and letters on arrows match the callout table.
 | 13  | The MetricKit framework the source subscribes to. | Delivers reports on its own schedule. |
 | 14  | The testing product, from `Sources/StratumTesting`. | Only an app's test target links it. |
 | 15  | `Recorder` keeps each snapshot it receives, in order. | A test reads what the app published. |
+| 16  | The file product, from `Sources/StratumFile`. | An app links it to offer a diagnostics file. |
+| 17  | `FilePlugin` appends each snapshot as one JSON line. | The file stays on the device until a person shares it. |
 | A   | The app adds the package and links its products. | SwiftPM or an Xcode package reference. |
 | B   | The app adds catalogs and plugins, and publishes. | One service per product. |
 | C   | The service checks each catalog's events. | A bad key fails when it is added, not when it is used. |
@@ -110,3 +119,5 @@ Numbers on nodes and letters on arrows match the callout table.
 | L   | The source publishes through the service. | Reports reach every plugin the app chose. |
 | M   | The recorder conforms to `Plugin`. | A test adds it like any other plugin. |
 | N   | The recorder can accept one level only. | A test proves what a filtering plugin receives. |
+| O   | The file plugin conforms to `Plugin`. | Private fields reach the file by name only. |
+| P   | The file plugin writes the event's category and level. | A reader filters the file by either. |

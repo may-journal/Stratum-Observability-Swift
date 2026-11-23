@@ -38,6 +38,7 @@ flowchart TB
     log[6 Entry in the unified log<br/>Req 0004]:::screen
     report[(7 System report published<br/>Req 0005)]:::system
     test(8 Assert events in a test<br/>Req 0006):::action
+    share[9 Diagnostics file to share<br/>Req 0007]:::screen
 
     dev --> catalog
     catalog --> plugins
@@ -47,6 +48,7 @@ flowchart TB
     plugins --> report
     report --> log
     snapshot --> test
+    snapshot --> share
 
     classDef persona fill:#eef2ff,stroke:#6366f1,color:#312e81,stroke-width:2px
     classDef screen fill:#f8fafc,stroke:#64748b,color:#1e293b,stroke-width:2px
@@ -66,3 +68,4 @@ Numbers match the callout table.
 | 6   | The developer reads the entry in Console or Xcode. | Screen | Private fields stay hidden there. |
 | 7   | MetricKit's daily report becomes events. | System | Crashes and hangs show beside the app's own events. |
 | 8   | The developer's test reads the recorder. | Action | A wrong key or field fails before release. |
+| 9   | A person shares the app's events file. | Screen | It holds no private value. |
