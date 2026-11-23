@@ -1,9 +1,8 @@
 import Foundation
 import Synchronization
 
-/// The service an app publishes catalogued events through. It holds the catalogs, the
-/// plugins and the context, and turns each published key into one snapshot for every plugin
-/// that accepts it. Every method is safe to call from any thread.
+/// The service an app publishes catalogued events through from any thread.
+/// It turns each published key into one snapshot for every plugin that accepts it.
 public final class Stratum: Sendable {
     /// The session every Stratum in this launch stamps on its snapshots.
     public static let launch = UUID()

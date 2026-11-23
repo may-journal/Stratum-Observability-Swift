@@ -11,8 +11,8 @@ import UITestingLibrary
 @MainActor
 struct Requirements {}
 
-/// A screen with one button, whose tap runs what the app does in response, as an app's own
-/// button publishes an event when a person uses it.
+/// A screen with one button whose tap runs the app's response.
+/// An app's own button publishes an event when a person uses it.
 struct ButtonScreen: View {
     let title: String
     let action: @MainActor () -> Void
