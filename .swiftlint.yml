@@ -1,6 +1,5 @@
-# SwiftLint, run by the fitness `swiftlint` check as `swiftlint lint --strict`.
+# The fitness `swiftlint` check runs `swiftlint lint --strict` with complexity 5, file and type length 200, function body 40 and line length 100.
 # Lines wrap with swift-format and .swift-format, as CONTRIBUTING.md shows.
-# Thresholds: complexity 5, file and type length 200, function body 40, line length 100.
 
 included:
   - Sources

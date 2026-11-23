@@ -1,6 +1,7 @@
 /// A destination for published events, such as the unified log.
 public protocol Plugin: Sendable {
-    /// Names the plugin. Adding a second plugin with the same name replaces the first.
+    /// The name that identifies the plugin.
+    /// A second plugin added with the same name replaces the first.
     var name: String { get }
     /// Whether this plugin publishes the snapshot. Every snapshot by default.
     func accepts(_ snapshot: Snapshot) -> Bool
