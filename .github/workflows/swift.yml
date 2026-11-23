@@ -10,8 +10,8 @@ concurrency:
   cancel-in-progress: true
 jobs:
   test:
-    # The package needs Swift 6.2 and the macOS 26 SDK, which this image's default Xcode holds.
-    runs-on: macos-26
+    # The UI testing dependency needs the macOS 27 SDK, which only the Xcode 27 preview image holds.
+    runs-on: xcode-27
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
@@ -28,8 +28,5 @@ jobs:
         shell: bash
         env:
           REPORT_STATUS: ${{ job.status }}
-        run: |
-          if [ "$REPORT_STATUS" = failure ]; then
-            printf '::error::Workflow job %s failed; open its logs for the failed step and cause.\n' "$GITHUB_JOB"
-          fi
+        run: >-
           printf '### Job %s: %s\n\n[View steps and logs](%s/%s/actions/runs/%s)\n' "$GITHUB_JOB" "$REPORT_STATUS" "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" >> "$GITHUB_STEP_SUMMARY"

@@ -17,7 +17,7 @@ swift test
 
 ## Checks
 
-Two checks run on every pull request. The [Swift workflow](.github/workflows/swift.yml) runs `swift build` and `swift test` on a macOS runner. The org's Fitness suite lints the sources and the docs. Run Fitness locally through the shared hooks, as the [Fitness CI guide](https://github.com/may-journal/fitness-runner/blob/main/docs/ci.md) describes:
+Two checks run on every pull request. The [Swift workflow](.github/workflows/swift.yml) runs `swift build` and `swift test` on a hosted macOS runner with Xcode 27. The org's Fitness suite lints the sources and the docs. Run Fitness locally through the shared hooks, as the [Fitness CI guide](https://github.com/may-journal/fitness-runner/blob/main/docs/ci.md) describes:
 
 ```sh
 git config --local core.hooksPath .fitness-hooks
