@@ -14,27 +14,27 @@ published keys
 
 ## Requirements
 
-- 0001.1
-    - Given Developer has a catalog holding an event
-        - When a person's tap publishes it
-            - Then my plugin receives that event
-- 0001.2
-    - Given Developer has no event under a key
-        - When I publish that key
-            - Then my plugin receives nothing
-- 0001.3
-    - Given Developer adds a catalog after start
-        - When I publish one of its events
-            - Then my plugin receives it from that catalog
-- 0001.4
-    - Given Developer removes a catalog
-        - When I publish one of its events
-            - Then my plugin receives nothing
-- 0001.5
-    - Given Developer has an event key with a space
-        - When I add its catalog
-            - Then adding fails and names the event
-- 0001.6
-    - Given Developer has a key another catalog holds
-        - When I add the catalog
-            - Then adding fails and names the other catalog
+1. Publishes held events
+   1. GIVEN Developer has a catalog holding an event
+      1. WHEN a person's tap publishes it
+         1. THEN my plugin receives that event
+2. Drops unknown keys
+   1. GIVEN Developer has no event under a key
+      1. WHEN I publish that key
+         1. THEN my plugin receives nothing
+3. Adds catalogs after start
+   1. GIVEN Developer adds a catalog after start
+      1. WHEN I publish one of its events
+         1. THEN my plugin receives it from that catalog
+4. Removes catalogs
+   1. GIVEN Developer removes a catalog
+      1. WHEN I publish one of its events
+         1. THEN my plugin receives nothing
+5. Rejects keys with spaces
+   1. GIVEN Developer has an event key with a space
+      1. WHEN I add its catalog
+         1. THEN adding fails and names the event
+6. Rejects duplicate keys
+   1. GIVEN Developer has a key another catalog holds
+      1. WHEN I add the catalog
+         1. THEN adding fails and names the other catalog

@@ -14,19 +14,19 @@ events published through the OSLog plugin
 
 ## Requirements
 
-- 0004.1
-    - Given Developer uses the OSLog plugin with my subsystem
-        - When I publish through it
-            - Then the log holds it under the event's category
-- 0004.2
-    - Given Developer has an error event
-        - When I publish the error
-            - Then the log entry has the error level
-- 0004.3
-    - Given Developer passes a public field
-        - When I log the event
-            - Then the log entry shows its value
-- 0004.4
-    - Given Developer passes a private field
-        - When I log that private field
-            - Then the log entry hides its value
+1. Logs under the category
+   1. GIVEN Developer uses the OSLog plugin with my subsystem
+      1. WHEN I publish through it
+         1. THEN the log holds it under the event's category
+2. Logs errors at error level
+   1. GIVEN Developer has an error event
+      1. WHEN I publish the error
+         1. THEN the log entry has the error level
+3. Shows public fields
+   1. GIVEN Developer passes a public field
+      1. WHEN I log the event
+         1. THEN the log entry shows its value
+4. Hides private fields
+   1. GIVEN Developer passes a private field
+      1. WHEN I log that private field
+         1. THEN the log entry hides its value

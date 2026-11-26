@@ -14,15 +14,15 @@ events published through the recorder
 
 ## Requirements
 
-- 0006.1
-    - Given Developer adds the recorder to my tests
-        - When I publish two events
-            - Then the recorder lists both keys in order
-- 0006.2
-    - Given Developer publishes two different events
-        - When I ask the recorder for one key
-            - Then I get only that key's snapshots
-- 0006.3
-    - Given Developer resets the recorder after one event
-        - When I publish another event
-            - Then the recorder holds only the newer one
+1. Records in order
+   1. GIVEN Developer adds the recorder to my tests
+      1. WHEN I publish two events
+         1. THEN the recorder lists both keys in order
+2. Filters by key
+   1. GIVEN Developer publishes two different events
+      1. WHEN I ask the recorder for one key
+         1. THEN I get only that key's snapshots
+3. Resets
+   1. GIVEN Developer resets the recorder after one event
+      1. WHEN I publish another event
+         1. THEN the recorder holds only the newer one
