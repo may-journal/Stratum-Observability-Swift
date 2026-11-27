@@ -1,0 +1,32 @@
+name: Swift
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: swift-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  test:
+    # The UI testing dependency needs the macOS 27 SDK, which only the Xcode 27 preview image holds.
+    runs-on: xcode-27
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: .build
+          key: swiftpm-${{ runner.os }}-${{ hashFiles('Package.resolved') }}
+      - run: swift --version
+      - run: swift build
+      - run: swift test
+      # The summary must be written even when checkout or the build failed.
+      - name: Report job outcome
+        if: ${{ always() }}
+        shell: bash
+        env:
+          REPORT_STATUS: ${{ job.status }}
+        run: >-
+          printf '### Job %s: %s\n\n[View steps and logs](%s/%s/actions/runs/%s)\n' "$GITHUB_JOB" "$REPORT_STATUS" "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" >> "$GITHUB_STEP_SUMMARY"
