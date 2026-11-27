@@ -1,6 +1,6 @@
 # Code
 
-The types an app uses, from [03-components.md](03-components.md). `Package.swift` declares the four products, for iOS 26 and macOS 26 and later, in Swift 6 language mode.
+The types an app uses, from [03-components.md](03-components.md). `Package.swift` declares the five products, for iOS 26 and macOS 26 and later, in Swift 6 language mode.
 
 ```mermaid
 classDiagram
@@ -41,6 +41,11 @@ classDiagram
     }
     class MetricReport["10 MetricReport"]
     class DiagnosticReport["11 DiagnosticReport"]
+    class FilePlugin["13 FilePlugin"] {
+        +url
+        +maxBytes
+        +olderURL
+    }
     class Recorder["12 Recorder"] {
         +snapshots
         +keys
@@ -66,6 +71,8 @@ classDiagram
     Recorder ..|> Plugin : Q
     Recorder --> Snapshot : R
     Recorder --> Level : S
+    FilePlugin ..|> Plugin : T
+    FilePlugin --> Snapshot : U
 
     style Stratum fill:#6d28d9,stroke:#4c1d95,color:#ffffff
     style Catalog fill:#6d28d9,stroke:#4c1d95,color:#ffffff
@@ -79,6 +86,7 @@ classDiagram
     style MetricReport fill:#6d28d9,stroke:#4c1d95,color:#ffffff
     style DiagnosticReport fill:#6d28d9,stroke:#4c1d95,color:#ffffff
     style Recorder fill:#6d28d9,stroke:#4c1d95,color:#ffffff
+    style FilePlugin fill:#6d28d9,stroke:#4c1d95,color:#ffffff
 ```
 
 ```mermaid
@@ -113,6 +121,7 @@ Numbers on classes and letters on relationships match the callout table.
 | 10  | `MetricReport` in [MetricReport.swift](../../Sources/StratumMetricKit/MetricReport.swift). | The period, app version and peak memory of a metric report. |
 | 11  | `DiagnosticReport` in [DiagnosticReport.swift](../../Sources/StratumMetricKit/DiagnosticReport.swift). | One field set per crash and per hang. |
 | 12  | `Recorder` in [Recorder.swift](../../Sources/StratumTesting/Recorder.swift). | An app's tests read the snapshots it kept. |
+| 13  | `FilePlugin` in [FilePlugin.swift](../../Sources/StratumFile/FilePlugin.swift). | Writes JSON lines to `url` and rolls to `olderURL` at `maxBytes`. |
 | A   | The service holds catalogs and checks each one it adds. | Every key is checked once. |
 | B   | A bad or duplicate key throws a `CatalogError`. | The developer reads which event to fix. |
 | C   | A catalog maps each key to its event. | Fields a key's event does not name are dropped. |
@@ -132,6 +141,8 @@ Numbers on classes and letters on relationships match the callout table.
 | Q   | `Recorder` conforms to `Plugin`. | A test adds it like any other plugin. |
 | R   | The recorder keeps each snapshot it receives. | Tests read keys, fields and context from them. |
 | S   | `Recorder.only` holds the one `Level` it accepts, or nil. | `accepts` compares it with the event's level. |
+| T   | `FilePlugin` conforms to `Plugin`. | It is added like any other plugin. |
+| U   | The file plugin encodes one snapshot per line. | Sorted keys keep each line stable. |
 
 ## Tests
 
