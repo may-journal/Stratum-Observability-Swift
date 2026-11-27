@@ -17,11 +17,13 @@ MetricKit reports delivered to the app
 1. Publishes metric reports
    1. GIVEN Developer uses the MetricKit source
       1. WHEN the system delivers a metric report
-         1. THEN my plugin receives its period and peak memory
+         1. THEN my plugin receives its period
+         2. THEN my plugin receives its peak memory
 2. Publishes crashes and hangs
    1. GIVEN Developer uses the MetricKit source
-      1. WHEN the system delivers a crash and a hang
-         1. THEN my plugin receives one event for each
+      1. WHEN the system delivers a diagnostic report
+         1. THEN my plugin receives one event for the crash
+         2. THEN my plugin receives one event for the hang
 3. Ignores other JSON
    1. GIVEN Developer uses the MetricKit source
       1. WHEN it receives JSON that is not a report

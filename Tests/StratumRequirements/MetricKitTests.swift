@@ -29,6 +29,7 @@ extension Requirements {
             let recorder = Recorder()
             let source = try MetricKitSource(stratum: notesStratum([recorder]))
             source.receive(diagnosticReport: try report("diagnostic-report"))
+            #expect(recorder.snapshots.count == 2)
             #expect(
                 recorder.snapshots.map(\.key) == [
                     MetricKitSource.Keys.crash, MetricKitSource.Keys.hang,

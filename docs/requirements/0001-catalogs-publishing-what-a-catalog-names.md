@@ -33,8 +33,10 @@ published keys
 5. Rejects keys with spaces
    1. GIVEN Developer has an event key with a space
       1. WHEN I add its catalog
-         1. THEN adding fails and names the event
+         1. THEN adding fails
+         2. THEN it names the event
 6. Rejects duplicate keys
    1. GIVEN Developer has a key another catalog holds
       1. WHEN I add the catalog
-         1. THEN adding fails and names the other catalog
+         1. THEN adding fails
+         2. THEN it names the other catalog
