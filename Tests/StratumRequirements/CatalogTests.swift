@@ -42,12 +42,10 @@ extension Requirements {
             let spaced = Catalog(
                 name: "Sharing", version: "1.0",
                 events: ["note shared": Event("A person shared a note", category: "share")])
+            let failure = #expect(throws: CatalogError.self) { try stratum.add(spaced) }
             #expect(
-                throws: CatalogError.invalidEvent(
-                    key: "note shared", reason: "its key must be one word")
-            ) {
-                try stratum.add(spaced)
-            }
+                failure
+                    == .invalidEvent(key: "note shared", reason: "its key must be one word"))
         }
 
         @Test func test0001_6() throws {
@@ -55,9 +53,8 @@ extension Requirements {
             let clash = Catalog(
                 name: "Drafts", version: "1.0",
                 events: ["note.saved": Event("A person saved a draft", category: "drafts")])
-            #expect(throws: CatalogError.duplicateKey(key: "note.saved", catalog: "Notes")) {
-                try stratum.add(clash)
-            }
+            let failure = #expect(throws: CatalogError.self) { try stratum.add(clash) }
+            #expect(failure == .duplicateKey(key: "note.saved", catalog: "Notes"))
         }
     }
 }
